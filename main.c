@@ -4,6 +4,7 @@
 #include "item.h"
 #include "list.h"
 #include "studente.h"
+#include "attesa.h"
 
 void menu() {
     printf("\nMenu:\n");
@@ -15,6 +16,8 @@ void menu() {
 
 int main(void){
     studente *s = malloc(sizeof(studente)*10);
+    list lista_attesa;
+    lista_attesa = newList();
     menu();
     int option;
     scanf("%d", &option);
