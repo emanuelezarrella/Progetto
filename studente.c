@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "item.h"
 #include "list.h"
-#include "list.c"
 #include "studente.h"
 
 
 typedef struct {
-    item **NC;
+    char **NC;
     item *matricola;
-    item *CDL;
+    char *CDL;
 } studente;
 
 int aggiungi_posizione_studente(){
@@ -27,27 +27,12 @@ int aggiungi_posizione_studente(){
     }
     return pos;
 }
-
-void registra_studente(studente *s){
-    int pos = aggiungi_posizione_studente();
-    s[pos].NC = malloc(sizeof(item*)*2);
-    s[pos].NC[0] = malloc(sizeof(item*)*20);
-    s[pos].NC[1] = malloc(sizeof(item*)*20);
-    s[pos].matricola = malloc(sizeof(item*)*10);
-    s[pos].CDL = malloc(sizeof(item*)*15);
-    printf("Immetere il proprio NOME: ");
-    scanf("%s", s[pos].NC[0]);
-    printf("Immetere il proprio COGNOME: ");
-    scanf("%s", s[pos].NC[1]);
-    printf("Immetere la propria MATRICOLA: ");
-    scanf("%s", s[pos].matricola);
-    printf("Immetere il proprio Corso di Laurea: ");
-    scanf("%s", s[pos].CDL);
-    printf("Registrazione Effetuata con sucesso");
-    printf("Benvenuto, %s %s", s[pos].NC[0], s[pos].NC[1]);
-    return pos;
-}
 void accedi_studente(studente *s, int pos){
+    s[pos].NC = malloc(sizeof(char*)*2);
+    s[pos].NC[0] = malloc(sizeof(char*)*20);
+    s[pos].NC[1] = malloc(sizeof(char*)*20);
+    s[pos].matricola = malloc(sizeof(item*)*10);
+    s[pos].CDL = malloc(sizeof(char*)*15);
     char matricola[10];
     printf("Per accedere alla propria area personale, immetere la propria Matricola: ");
     scanf("%s", matricola);
@@ -67,15 +52,21 @@ void accedi_studente(studente *s, int pos){
         return pos;
      }
 
-void inserimento_prenotazione(studente *s){
-    int pos;
-    accedi_studente(s, pos);
-    item prenotazione;
-    printf("Per procedere con l'inserimento della prenotazione, immetere nuovamente la propria Matricola: ");
+void registra_studente(studente *s){
+    int pos = aggiungi_posizione_studente();
+    printf("Immetere il proprio NOME: ");
+    scanf("%s", s[pos].NC[0]);
+    printf("Immetere il proprio COGNOME: ");
+    scanf("%s", s[pos].NC[1]);
+    printf("Immetere la propria MATRICOLA: ");
     scanf("%s", s[pos].matricola);
-    s[pos].NC[0] = prenotazione;
-    printf("%s la tua prenotazione è stata inserita con successo", s[pos].NC[0]);
-    prenotazione = newlist();
-    consList(prenotazione, pos);
-    printf("le abbiamo assegnato il posto %d", pos);
+    printf("Immetere il proprio Corso di Laurea: ");
+    scanf("%s", s[pos].CDL);
+    printf("Registrazione Effetuata con sucesso");
+    s[pos].NC = realloc(s[pos].NC, sizeof(char*)*40);
+    s[pos].NC = strcpy(s[pos].NC, s[pos].NC[0]);
+    s[pos].NC = strcat(s[pos].NC, " ");
+    s[pos].NC = strcat(s[pos].NC, s[pos].NC[1]);
+    printf("Benvenuto, %s %s", s[pos].NC[0], s[pos].NC[1]);
+    return pos;
 }
