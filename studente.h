@@ -2,12 +2,13 @@
 #include "list.h"
 
 typedef struct {
-    item NC;
+    char NC;
     item matricola;
-    item CDL;
+    char CDL;
 } studente;
 
-void aggiungi_posizione_studente();
+int aggiungi_posizione_studente();
 void registra_studente(studente *s);
 void accedi_studente(studente *s, int pos);
+void verifica_disponibilità_data(item data);
 void inserimento_prenotazione(studente *s);

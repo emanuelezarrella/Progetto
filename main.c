@@ -9,7 +9,9 @@ void menu() {
     printf("\nMenu:\n");
     printf("1. Registra studente\n");
     printf("2. Prenota posto\n");
-    printf("3. Esci\n");
+    printf("3. Verifica disponibilità orario\n");
+    printf("4. Check-in prenotazioni\n");
+    printf("5. Esci\n");
     printf("Scegli un'opzione: ");
 }
 
@@ -34,4 +36,5 @@ int main(void){
         }
     }
     return 0;
+}
 }
