@@ -30,6 +30,7 @@ int main(void){
             accedi_studente(s, pos);
             inserimento_prenotazione(s);
             break;
+        }
         case 3: {
             printf("Arrivederci!");
             break;
