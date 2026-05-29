@@ -4,6 +4,7 @@
 #include "item.h"
 #include "list.h"
 #include "studente.h"
+#include "listaattesa.h"
 
 void menu() {
     printf("\nMenu:\n");
