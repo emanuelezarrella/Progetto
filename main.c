@@ -18,6 +18,7 @@ void menu() {
 
 int main(void){
     studente *s = malloc(sizeof(studente)*10);
+    list listaattesa = newList();
     menu();
     int option;
     scanf("%d", &option);
@@ -29,7 +30,7 @@ int main(void){
         case 2: {
             int pos;
             accedi_studente(s, pos);
-            inserimento_prenotazione(s);
+            inserimento_prenotazione(s, &listaattesa);
             break;
         }
         case 3: {
