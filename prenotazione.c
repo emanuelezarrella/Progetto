@@ -5,6 +5,7 @@
 #include "list.h"
 #include "list.c"
 #include "studente.h"
+#include "listaattesa.h"
 
 void verifica_disponibilità_data(item data){
     int **tempdate;
@@ -66,7 +67,7 @@ void verifica_disponibilità_data(item data){
     data = newlist();
     consList(data, tempdate);
 }
-void inserimento_prenotazione(studente *s){
+void inserimento_prenotazione(studente *s , list *listaattesa){
     int pos;
     accedi_studente(s, &pos);
     list prenotazione_mattina;
