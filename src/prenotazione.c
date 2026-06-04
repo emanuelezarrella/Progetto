@@ -3,8 +3,8 @@
 #include <string.h>
 #include "item.h"
 #include "list.h"
-#include "list.c"
 #include "studente.h"
+#include "prenotazione.h"
 
 void verifica_disponibilità_data(int data){
     int **tempdate;
@@ -63,60 +63,109 @@ void verifica_disponibilità_data(int data){
             break;
         }
     }
-    data = newlist();
+    data = newList();
     consList(data, tempdate);
 }
-void inserimento_prenotazione(studente *s){
-    int pos;
-    accedi_studente(s, &pos);
-    list prenotazione_mattina;
-    list prenotazione_primopomeriggio;
-    list prenotazione_secondopomeriggio;
+
+void trova_posto(Studente *s, int matricola){
+    cerca_studente(s, matricola);
+    int orario;
+    printf("Immetere in che orario si vuole prenotare: \n");
+    printf("1. 08:30-11:45\n");
+    printf("2. 11:45-15:00\n");
+    printf("3. 15:00-18:15\n");
+    scanf("%d", &orario);
+    switch (orario) {
+        case 1: {
+        list cur = lista_mattina;
+
+        for(int i = 0; !emptyList(cur); i++){
+        Studente *s = (Studente *) getFirst(cur);
+        if (s != NULL && s->matricola == matricola) {
+            printf("%s in posizione %d", s->nc, i);
+            return;
+        }
+        cur = tailList(cur);
+        }
+        break;
+        }
+        case 2: {
+        list cur = lista_primopomeriggio;
+
+        for(int i = 0; !emptyList(cur); i++){
+        Studente *s = (Studente *) getFirst(cur);
+        if (s != NULL && s->matricola == matricola) {
+            printf("%s in posizione %d", s->nc, i);
+            return;
+        }
+        cur = tailList(cur);
+        }
+        break;
+        }
+        case 3: {
+        list cur = lista_secondopomeriggio;
+
+        for(int i = 0; !emptyList(cur); i++){
+        Studente *s = (Studente *) getFirst(cur);
+        if (s != NULL && s->matricola == matricola) {
+            printf("%s in posizione %d", s->nc, i);
+            return;
+        }
+        cur = tailList(cur);
+        }
+        break;
+        }
+    }
+}
+
+void inserimento_prenotazione(Studente *s, int matricola){
+    cerca_studente(s, matricola);
     int data;
+    int option;
     verifica_disponibilità_data(data);
     printf("Immetere in che orario si vuole prenotare: \n");
     printf("1. 08:30-11:45\n");
     printf("2. 11:45-15:00\n");
     printf("3. 15:00-18:15\n");
-    int option;
     scanf("%d", &option);
     switch (option) {
         case 1: {
-            printf("%s la tua prenotazione è stata inserita con successo", s[pos].NC);
-            prenotazione_mattina = newlist();
-            consList(prenotazione_mattina, s[pos].NC);
-            printf("le abbiamo assegnato il posto %d", pos);
+            printf("%s la tua prenotazione è stata inserita con successo", s->nc);
+            if(lista_mattina == NULL) lista_mattina = newList();
+            lista_mattina = consList(s->nc, lista_mattina);
             break;
         }
         case 2: {
-            printf("%s la tua prenotazione è stata inserita con successo", s[pos].NC);
-            prenotazione_primopomeriggio = newlist();
-            consList(prenotazione_primopomeriggio, s[pos].NC);
-            printf("le abbiamo assegnato il posto %d", pos);
+            printf("%s la tua prenotazione è stata inserita con successo", s->nc);
+            if(lista_primopomeriggio == NULL) lista_primopomeriggio = newList();
+            lista_primopomeriggio = consList(s->nc, lista_primopomeriggio);
             break;
         }
         case 3: {
-            printf("%s la tua prenotazione è stata inserita con successo", s[pos].NC);
-            prenotazione_secondopomeriggio = newlist();
-            consList(prenotazione_secondopomeriggio, s[pos].NC);
-            printf("le abbiamo assegnato il posto %d", pos);
+            printf("%s la tua prenotazione è stata inserita con successo", s->nc);
+            if(lista_secondopomeriggio == NULL) lista_secondopomeriggio = newList();
+            lista_secondopomeriggio = consList(s->nc, lista_secondopomeriggio);
             break;
         }
     }
 }
+ 
+
 
 void verifica_disponibilità_orario(int orario, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
-    sizelist(prenotazione_mattina);
-    sizelist(prenotazione_primopomeriggio);
-    sizelist(prenotazione_secondopomeriggio);
-    printf("Il numero di prenotazioni per la mattina è: %d", sizelist(prenotazione_mattina));
-    printf("Il numero di prenotazioni per il primo pomeriggio è: %d", sizelist(prenotazione_primopomeriggio));
-    printf("Il numero di prenotazioni per il secondo pomeriggio è: %d", sizelist(prenotazione_secondopomeriggio));
+    sizeList(prenotazione_mattina);
+    sizeList(prenotazione_primopomeriggio);
+    sizeList(prenotazione_secondopomeriggio);
+    printf("Il numero di prenotazioni per la mattina è: %d", sizeList(prenotazione_mattina));
+    printf("Il numero di prenotazioni per il primo pomeriggio è: %d", sizeList(prenotazione_primopomeriggio));
+    printf("Il numero di prenotazioni per il secondo pomeriggio è: %d", sizeList(prenotazione_secondopomeriggio));
 }
 
+
+/*
 void checkin_studente(studente *s, int pos, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
     accedi_studente(s, pos);
-    for(int i = 0; i < sizelist(s) || i > -1; i++){
+    for(int i = 0; i < sizeList(listaStudenti) || i > -1; i++){
         int val = i;
         if(!posItem(prenotazione_mattina, s[pos].NC) || !posItem(prenotazione_primopomeriggio, s[pos].NC) || !posItem(prenotazione_secondopomeriggio, s[pos].NC)){
             printf("Check-in effettuato con successo, buon lavoro!");
@@ -130,4 +179,4 @@ void checkin_studente(studente *s, int pos, list prenotazione_mattina, list pren
         }
         return pos;
 }
-
+*/

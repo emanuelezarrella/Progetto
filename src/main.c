@@ -4,6 +4,7 @@
 #include "item.h"
 #include "list.h"
 #include "studente.h"
+#include "prenotazione.h"
 
 void menu() {
     printf("\nMenu:\n");
@@ -11,30 +12,49 @@ void menu() {
     printf("2. Prenota posto\n");
     printf("3. Verifica disponibilità orario\n");
     printf("4. Check-in prenotazioni\n");
+    printf("6: trova_studente\n");
     printf("5. Esci\n");
     printf("Scegli un'opzione: ");
 }
 
 int main(void){
-    studente *s = malloc(sizeof(studente)*10);
+    Studente *s = malloc(sizeof(item)*10);  
+    here:  
     menu();
     int option;
     scanf("%d", &option);
     switch (option) {
         case 1: {
             registra_studente(s);
+            goto here;
             break;
         }
         case 2: {
-            int pos;
-            accedi_studente(s, pos);
-            inserimento_prenotazione(s);
+            int matricola;
+            printf("Inserisci la matricola dello studente da cercare: NF");
+            scanf("%d", &matricola);
+            inserimento_prenotazione(s, matricola);
+            trova_posto(s, matricola);
             break;
+        }
         case 3: {
             printf("Arrivederci!");
             break;
         }
-    }
+        case 4: {
+            printf("Arrivederci!");
+            break;
+        }
+        case 5: {
+            printf("Arrivederci!"); 
+            break;
+        }
+        case 6: {
+            int matricola;
+            printf("Inserisci la matricola dello studente da cercare: NF");
+            scanf("%d", &matricola);
+            cerca_studente(s, matricola);
     return 0;
+}
 }
 }

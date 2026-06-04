@@ -164,24 +164,29 @@ list insertList (list l, int pos, item val)
 {
  item x;
  int i = 0;
+ list head = l;
  list ltmp = newList(); // lista di appoggio
  list lo = newList(); // lista di output
-/* scandiamo la lista di input fino alla posizione pos e
-memorizziamo i primi pos-1 elementi in una lista di appoggio ltmp */
+ if (pos < 0)
+  return head;
+ /* scandiamo la lista di input fino alla posizione pos e
+ memorizziamo i primi pos-1 elementi in una lista di appoggio ltmp */
  while (i < pos && !emptyList(l)) {
- x = getFirst(l);
- ltmp = consList(x, ltmp);
- l = tailList(l);
- i++;
- }if(i==pos) {
- lo = consList(val, l);
- while(!emptyList(ltmp)) {
- x = getFirst(ltmp);
- lo = consList(x, lo);
- ltmp = tailList(ltmp);
+  x = getFirst(l);
+  ltmp = consList(x, ltmp);
+  l = tailList(l);
+  i++;
  }
+ if (i == pos) {
+  lo = consList(val, l);
+  while(!emptyList(ltmp)) {
+   x = getFirst(ltmp);
+   lo = consList(x, lo);
+   ltmp = tailList(ltmp);
+  }
+  return lo;
  }
- return(lo);
+ return head;
 }
 
 list removeList (list l, int pos){

@@ -6,11 +6,7 @@ int eq(item x, item y) {
 }
 
 void input_item(item *x) {
-    if (x != NULL) {
-        scanf("%d", x);
-    }
 }
 
 void output_item(item x) {
-    printf("%d", x);
 }

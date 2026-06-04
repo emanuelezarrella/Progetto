@@ -1,9 +1,7 @@
 // file item.h
 
-typedef int item;
-#define NULLITEM 0
-
-/* per semplicità il nostro tipo item è l’insieme degli interi */
+typedef void* item;
+#define NULLITEM NULL
 
 int eq(item x, item y);
 void input_item(item *x);

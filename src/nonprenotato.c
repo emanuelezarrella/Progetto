@@ -4,7 +4,7 @@
 #include "list.h"
 #include "studente.h"
 
-void ingresso_senza_prenotazione(list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio, studente *s){
+/* void ingresso_senza_prenotazione(list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio, Studente *s){
     int pos;
     accedi_studente(s, pos);
     printf("Benvenuto, puoi accedere alla biblioteca senza prenotazione al primo posto disponibile");
@@ -20,9 +20,9 @@ void ingresso_senza_prenotazione(list prenotazione_mattina, list prenotazione_pr
     else {
         printf("Siamo spiacenti, non ci sono posti disponibili");
     }
-}
+}*/
 
-  void rimuovi_prenotazione(studente *s, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
+ /* void rimuovi_prenotazione(Studente *s, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
     int pos;
     accedi_studente(s, pos);
     for(int i = 0; i < sizelist(s) || i > -1; i++){
@@ -36,4 +36,4 @@ void ingresso_senza_prenotazione(list prenotazione_mattina, list prenotazione_pr
             printf("Non hai prenotazioni attive");
         }
     }
-}
+}*/
