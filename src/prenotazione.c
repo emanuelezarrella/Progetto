@@ -6,7 +6,7 @@
 #include "list.c"
 #include "studente.h"
 
-void verifica_disponibilità_data(item data){
+void verifica_disponibilità_data(int data){
     int **tempdate;
     tempdate = malloc(sizeof(int*)*2);
     tempdate[0] = malloc(sizeof(int*)*2); //giorno
@@ -105,7 +105,7 @@ void inserimento_prenotazione(studente *s){
     }
 }
 
-void verifica_disponibilità_orario(item orario, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
+void verifica_disponibilità_orario(int orario, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
     sizelist(prenotazione_mattina);
     sizelist(prenotazione_primopomeriggio);
     sizelist(prenotazione_secondopomeriggio);
