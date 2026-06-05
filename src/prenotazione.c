@@ -67,8 +67,11 @@ void verifica_disponibilità_data(int data){
     consList(data, tempdate);
 }
 
-void trova_posto(Studente *s, int matricola){
-    cerca_studente(s, matricola);
+void *trova_posto(Studente *s, int matricola){
+    if (!cerca_studente(s, matricola)) {
+        printf("Studente non trovato.");
+        return NULL;
+    }
     int orario;
     printf("Immetere in che orario si vuole prenotare: \n");
     printf("1. 08:30-11:45\n");
@@ -119,7 +122,10 @@ void trova_posto(Studente *s, int matricola){
 }
 
 void inserimento_prenotazione(Studente *s, int matricola){
-    cerca_studente(s, matricola);
+    if (!cerca_studente(s, matricola)) {
+        printf("Studente non trovato.");
+        return NULL;
+    }
     int data;
     int option;
     verifica_disponibilità_data(data);
@@ -152,31 +158,24 @@ void inserimento_prenotazione(Studente *s, int matricola){
  
 
 
-void verifica_disponibilità_orario(int orario, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
-    sizeList(prenotazione_mattina);
-    sizeList(prenotazione_primopomeriggio);
-    sizeList(prenotazione_secondopomeriggio);
-    printf("Il numero di prenotazioni per la mattina è: %d", sizeList(prenotazione_mattina));
-    printf("Il numero di prenotazioni per il primo pomeriggio è: %d", sizeList(prenotazione_primopomeriggio));
-    printf("Il numero di prenotazioni per il secondo pomeriggio è: %d", sizeList(prenotazione_secondopomeriggio));
+void verifica_disponibilità_orario(int orario, list lista_mattina, list lista_primopomeriggio, list lista_secondopomeriggio){
+    sizeList(lista_mattina);
+    sizeList(lista_primopomeriggio);
+    sizeList(lista_secondopomeriggio);
+    printf("Il numero di prenotazioni per la mattina è: %d", sizeList(lista_mattina));
+    printf("Il numero di prenotazioni per il primo pomeriggio è: %d", sizeList(lista_primopomeriggio));
+    printf("Il numero di prenotazioni per il secondo pomeriggio è: %d", sizeList(lista_secondopomeriggio));
 }
 
 
-/*
-void checkin_studente(studente *s, int pos, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
-    accedi_studente(s, pos);
-    for(int i = 0; i < sizeList(listaStudenti) || i > -1; i++){
-        int val = i;
-        if(!posItem(prenotazione_mattina, s[pos].NC) || !posItem(prenotazione_primopomeriggio, s[pos].NC) || !posItem(prenotazione_secondopomeriggio, s[pos].NC)){
-            printf("Check-in effettuato con successo, buon lavoro!");
-            pos = val;
-            i = -1;
-        }
-        else if(i > sizelist(s)){
-            printf("Matricola non trovata, registrazione necessaria");
-            registra_studente(s);
-        }
-        }
-        return pos;
+
+void checkin_studente(Studente *s, list lista_mattina, list lista_primopomeriggio, list lista_secondopomeriggio){
+    int matricola;
+    printf("Immetere la matricola per effettuare il check-in: ");
+    scanf("%d", &matricola);
+    if (!trova_posto(s, matricola)) {
+        printf("Studente non trovato.");
+        return NULL;
+    }
+    printf("Check-in effettuato con successo, buon studio!");
 }
-*/

@@ -1,5 +1,4 @@
 // file item.h
-
 typedef void* item;
 #define NULLITEM NULL
 

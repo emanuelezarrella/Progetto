@@ -3,37 +3,96 @@
 #include "item.h"
 #include "list.h"
 #include "studente.h"
+#include "prenotazione.h"
 
-/* void ingresso_senza_prenotazione(list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio, Studente *s){
-    int pos;
-    accedi_studente(s, pos);
-    printf("Benvenuto, puoi accedere alla biblioteca senza prenotazione al primo posto disponibile");
-    if(sizelist(prenotazione_mattina) < 20){
-        printf("le abbiamo assegnato il posto %d", sizelist(prenotazione_mattina)+1);
+void ingresso_senza_prenotazione(Studente *s, list lista_mattina, list lista_primopomeriggio, list lista_secondopomeriggio){
+    int matricola;
+    printf("Immetere la matricola per accedere alla biblioteca senza prenotazione: ");
+    scanf("%d", &matricola);
+    cerca_studente(s, matricola);
+    printf("scegliere un orario per accedere alla biblioteca: \n");
+    printf("1. 08:30-11:45\n");
+    printf("2. 11:45-15:00\n");
+    printf("3. 15:00-18:15\n");
+    int orario;
+    scanf("%d", &orario);
+    switch (orario) {
+        case 1: { 
+            if(sizeList(lista_mattina) < 20){
+                lista_mattina = consList(s->nc, lista_mattina);
+            }
+            else {
+                printf("Siamo spiacenti, non ci sono posti disponibili in questo orario");
+            }
+            break;
+        }
+        case 2: { 
+            if(sizeList(lista_primopomeriggio) < 20){
+                lista_primopomeriggio = consList(s->nc, lista_primopomeriggio);
+            }
+            else {
+                printf("Siamo spiacenti, non ci sono posti disponibili in questo orario");
+            }
+            break;
+        }
+        case 3: { 
+            if(sizeList(lista_secondopomeriggio) < 20){
+                lista_secondopomeriggio = consList(s->nc, lista_secondopomeriggio);
+            }
+            else {
+                printf("Siamo spiacenti, non ci sono posti disponibili in questo orario");
+            }
+            break;
+        }
     }
-    else if(sizelist(prenotazione_primopomeriggio) < 20){
-        printf("le abbiamo assegnato il posto %d", sizelist(prenotazione_primopomeriggio)+1);
-    }
-    else if(sizelist(prenotazione_secondopomeriggio) < 20){
-        printf("le abbiamo assegnato il posto %d", sizelist(prenotazione_secondopomeriggio)+1);
-    }
-    else {
-        printf("Siamo spiacenti, non ci sono posti disponibili");
-    }
-}*/
+}
 
- /* void rimuovi_prenotazione(Studente *s, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
-    int pos;
-    accedi_studente(s, pos);
-    for(int i = 0; i < sizelist(s) || i > -1; i++){
-        int val = i;
-        if(!strcmp(s[pos].NC, prenotazione_mattina) || !strcmp(s[pos].NC, prenotazione_primopomeriggio) || !strcmp(s[pos].NC, prenotazione_secondopomeriggio)){
-            printf("La tua prenotazione è stata rimossa con successo");
-            pos = val;
-            i = -1;
+ void rimuovi_prenotazione(Studente *s, int matricola, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio){
+    printf("Immetere la matricola per rimuovere la prenotazione: ");
+    scanf("%d", &matricola);
+    cerca_studente(s, matricola);
+    printf("scegliere un orario per rimuovere la prenotazione: \n");
+    printf("1. 08:30-11:45\n");
+    printf("2. 11:45-15:00\n");
+    printf("3. 15:00-18:15\n");
+    int orario;
+    scanf("%d", &orario);
+    switch (orario) {
+        case 1: {
+            list cur = lista_mattina;
+            for(int i = 0; !emptyList(cur); i++){
+                Studente *s = (Studente *) getFirst(cur);
+                if (s != NULL && s->matricola == matricola) {
+                    removeItem(prenotazione_mattina, s->nc);
+                    break;
+                }
+                cur = tailList(cur);
+            }
+            break;
         }
-        else if(i > sizelist(s)){
-            printf("Non hai prenotazioni attive");
+        case 2: {
+            list cur = lista_primopomeriggio;
+            for(int i = 0; !emptyList(cur); i++){
+                Studente *s = (Studente *) getFirst(cur);
+                if (s != NULL && s->matricola == matricola) {
+                    removeItem(prenotazione_primopomeriggio, s->nc);
+                    break;
+                }
+                cur = tailList(cur);
+            }
+            break;
+        }
+        case 3: {
+            list cur = lista_secondopomeriggio;
+            for(int i = 0; !emptyList(cur); i++){
+                Studente *s = (Studente *) getFirst(cur);
+                if (s != NULL && s->matricola == matricola) {
+                    removeItem(prenotazione_secondopomeriggio, s->nc);
+                    break;
+                }
+                cur = tailList(cur);
+            }
+            break;
         }
     }
-}*/
+}

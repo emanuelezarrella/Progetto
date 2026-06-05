@@ -18,4 +18,3 @@ typedef struct studente{
 void registra_dati_studente(Studente *s);
 void crea_studente(Studente *s);
 void *cerca_studente(Studente *s,int matricola);
-//void *cerca_studente(int matricola);

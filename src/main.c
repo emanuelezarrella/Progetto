@@ -34,15 +34,20 @@ int main(void){
             printf("Inserisci la matricola dello studente da cercare: NF");
             scanf("%d", &matricola);
             inserimento_prenotazione(s, matricola);
-            trova_posto(s, matricola);
             break;
         }
         case 3: {
-            printf("Arrivederci!");
+            printf("immetere l'orario da verificare: \n");
+            printf("1. 08:30-11:45\n");
+            printf("2. 11:45-15:00\n");
+            printf("3. 15:00-18:15\n");
+            int orario;
+            scanf("%d", &orario);
+            verifica_disponibilità_orario(orario, lista_mattina, lista_primopomeriggio, lista_secondopomeriggio);
             break;
         }
         case 4: {
-            printf("Arrivederci!");
+            checkin_studente(s, lista_mattina, lista_primopomeriggio, lista_secondopomeriggio);
             break;
         }
         case 5: {
