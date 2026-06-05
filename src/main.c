@@ -55,9 +55,9 @@ int main(void){
             break;
         }
         case 6: {
-            int matricola;
+            char matricola[MAX_MATRICOLA];
             printf("Inserisci la matricola dello studente da cercare: NF");
-            scanf("%d", &matricola);
+            fgets(matricola, sizeof(matricola), stdin);
             cerca_studente(s, matricola);
     return 0;
 }
