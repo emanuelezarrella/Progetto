@@ -7,6 +7,9 @@
 #define MAX_CORSO 67
 #define MAX_MATRICOLA 7
 
+extern list listaStudenti;
+//visto che l'abbiamo dichiarata nel file c usiamo extern così non allochiamo nuova memoria
+
 typedef struct studente{
     char nc[MAX_STUD];
     char matricola[MAX_MATRICOLA];
@@ -18,6 +21,7 @@ typedef struct studente{
 
 void registra_dati_studente(Studente *s);
 void crea_studente(Studente *s);
-void *cerca_studente(Studente *s,char matricola);
+Studente *cerca_studente(Studente *s, const char *matricola);
+Studente *libera_studente(Studente *s, const char *matricola);
 
-#endif /* STUDENTE_H */
+#endif
