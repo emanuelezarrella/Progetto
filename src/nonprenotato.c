@@ -96,3 +96,11 @@ void ingresso_senza_prenotazione(Studente *s, list lista_mattina, list lista_pri
         }
     }
 }
+void visualizza_prenotazioni(list lista_mattina, list lista_primopomeriggio, list lista_secondopomeriggio){
+    printf("Prenotazioni per l'orario 08:30-11:45:\n");
+    outputList(lista_mattina);
+    printf("Prenotazioni per l'orario 11:45-15:00:\n");
+    outputList(lista_primopomeriggio);
+    printf("Prenotazioni per l'orario 15:00-18:15:\n");
+    outputList(lista_secondopomeriggio);
+}
