@@ -3,9 +3,9 @@
 
 #include "item.h"
 #include "list.h"
-#define MAX_STUD 67
-#define MAX_CORSO 67
-#define MAX_MATRICOLA 7
+#define MAX_STUD 30
+#define MAX_CORSO 30
+#define MAX_MATRICOLA 9
 
 extern list listaStudenti;
 //visto che l'abbiamo dichiarata nel file c usiamo extern così non allochiamo nuova memoria
