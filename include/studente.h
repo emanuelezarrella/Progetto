@@ -1,0 +1,24 @@
+#ifndef STUDENTE_H
+#define STUDENTE_H
+
+#include "item.h"
+#include "list.h"
+#define MAX_STUD 30
+#define MAX_CORSO 30
+#define MAX_MATRICOLA 9
+
+extern list listaStudenti;
+//visto che l'abbiamo dichiarata nel file c usiamo extern così non allochiamo nuova memoria
+
+typedef struct studente{
+    char nc[MAX_STUD];
+    char matricola[MAX_MATRICOLA];
+    char corso[MAX_CORSO];
+} Studente;
+
+void registra_dati_studente(Studente *s);
+void crea_studente(Studente *s);
+Studente *cerca_studente(Studente *s, const char *matricola);
+Studente *libera_studente(Studente *s, const char *matricola);
+
+#endif
