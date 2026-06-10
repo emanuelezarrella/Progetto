@@ -7,8 +7,11 @@
 #include "studente.h"
 
 list listaStudenti = NULL;
-
-void registra_dati_studente(Studente *s){
+/*
+* Prende in input Studente *s (vuoto)
+* Chiede all'utente di immetere i dati definiti nella struttura studente
+*/
+void registra_dati_studente(Studente *s){ 
     char matricola[MAX_MATRICOLA];
     here:
     printf("\nImmetere la propria MATRICOLA: NF");
@@ -25,15 +28,22 @@ void registra_dati_studente(Studente *s){
     fgets(s->nc, sizeof(s->nc), stdin);
     printf("Immetere il proprio Corso di Laurea: ");
     fgets(s->corso, sizeof(s->corso), stdin);
-    printf("\nRegistrazione Effettuata con successo\n");
+    //printf("\nRegistrazione Effettuata con successo\n");
 }
-
+/*
+*  prende in input lo Studente s vuoto
+*  s viene dato alla funzione registra studente, vengono restituiti i dati inseriti dall'utente
+*  definiamo student_ptr una nuova area di memoria e con memcpy (Funzione che alloca un blocco di memoria ad un'altro)
+*  se la lista studenti è NULL (lo è all'avvio del programma) allora creaiamo una nuova lista
+*  facciamo un controllo per verificare che lo studente non sia già registrato
+*  inseriamo i dati studenti s nella lista studenti
+*/
 void crea_studente(Studente *s){
     registra_dati_studente(s);
     Studente *student_ptr = malloc(sizeof(Studente));
     memcpy(student_ptr, s, sizeof(Studente));
     if(listaStudenti == NULL) listaStudenti = newList();
-    if (cerca_studente(s, s->matricola) != NULL) {
+    else if (cerca_studente(s, s->matricola) != NULL) {
         printf("Studente con matricola NF%s già registrato.\n", s->matricola);
         //free(student_ptr);
         return;
@@ -41,6 +51,12 @@ void crea_studente(Studente *s){
     listaStudenti = consList(student_ptr, listaStudenti);
 }
 
+/*
+*  lista studenti viene passata a lista cur (per non modificarla)
+*  finché cur non è vuota allora viene presa la testa della lista 
+*  viene fatto un confronto con la matricola presa in input e quella che si trova dentro la struttura
+*  se le due matricole coincidono allora lo studente è trovato
+*/
 Studente *cerca_studente(Studente *s, const char *matricola){
     list cur = listaStudenti;
     while (!emptyList(cur)) {
@@ -49,11 +65,20 @@ Studente *cerca_studente(Studente *s, const char *matricola){
             printf("Studente trovato: NF%s, %s, %s\n", student->matricola, student->nc, student->corso);
             return student;
         }
+        else{
+            printf("Studente con matricola NF%s non trovato.\n", matricola);
+        }
         cur = tailList(cur);
     }
-    printf("Studente con matricola NF%s non trovato.\n", matricola);
     return NULL;
 }
+
+/*
+* lista studenti viene passata a lista cur 
+* finché cur non è vuota allora viene presa la testa della lista
+* viene fatto un confronto con la matricola presa in input e quella che si trova dentro la struttura
+* se le matricole coincidono allora lo studente viene elliminato dalla lista studenti
+*/
 
 Studente *libera_studente(Studente *s, const char *matricola){
 

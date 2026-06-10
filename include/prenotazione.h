@@ -22,10 +22,9 @@ Prenotazione *crea_posto(Studente *s, Prenotazione *p, const char *matricola);
 void registra_prenotazione(Studente *s, Prenotazione *p);
 Prenotazione *cerca_posto(Prenotazione *p, const char *matricola);
 void verifica_disponibilità_orario(Prenotazione *p);
-void ingresso_senza_prenotazione(Studente *s, list lista_mattina, list lista_primopomeriggio, list lista_secondopomeriggio);
+void ingresso_senza_prenotazione(Studente *s);
 void libera_prenotazione(Studente *s, int matricola, list prenotazione_mattina, list prenotazione_primopomeriggio, list prenotazione_secondopomeriggio);
 void visualizza_prenotazioni(list lista_mattina, list lista_primopomeriggio, list lista_secondopomeriggio);
-void inserimento_prenotazione(Studente *s, const char *matricola);
 void checkin_studente(Studente *s, Prenotazione *p, list lista_mattina, list lista_primopomeriggio, list lista_secondopomeriggio);
 
 #endif 

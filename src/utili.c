@@ -7,7 +7,7 @@ int verifica_data(int *giorno, int *mese, int *anno){
         return 0;
     }
 
-    if (*anno < 1900) return 0;
+    if (*anno < 2026) return 0; //prenotazione da quest'anno in poi
     if (*mese < 1 || *mese > 12) return 0;
     if (*giorno < 1 || *giorno > 31) return 0;
 

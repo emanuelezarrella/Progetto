@@ -15,9 +15,6 @@ typedef struct studente{
     char matricola[MAX_MATRICOLA];
     char corso[MAX_CORSO];
 } Studente;
-// s.sin = tipi usati char
-// s.sem = studente è la tipologia di dato che contiene i campi nome e cognome, matricola e corso di laurea
-
 
 void registra_dati_studente(Studente *s);
 void crea_studente(Studente *s);
